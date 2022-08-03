@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-function App() {
+import Home from "./pages/home";
+import About from "./pages/about";
+import Navbar from "./components/navbar";
+import { TheApp } from "./styles/app.styles";
+import { useState } from "react";
+
+const App = () => {
+  const [item, setItem] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>
+        <TheApp>
+          <BrowserRouter>
+            <Navbar />
+            <Routes>
+              <Route
+                path="/"
+                element={<Home setItem={setItem} item={item} />}
+              />
+              <Route
+                path="/about"
+                element={<About item={item} />}
+              />
+            </Routes>
+          </BrowserRouter>
+        </TheApp>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
